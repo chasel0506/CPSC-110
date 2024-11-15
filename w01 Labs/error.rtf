@@ -1,0 +1,69 @@
+{\rtf1\ansi\ansicpg950\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset136 PingFangTC-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww17980\viewh11860\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Error # 1\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+year = int(input(\'91Enter the year: \'91)\
+a = math.floor(year / 100)\
+b = year % 100\
+c = math.floor(b / 4)\
+d = 6 % 4\
+e = year % 19\
+f = a % 4\
+g = math.floor(a / 4)\
+h = math.floor((a + 8) / 25)\
+i = math.floor(a - h + 1) / 3)\
+j = (19 * e + a - g - i + 15) % 30\
+k = (32 + 2 * 
+\f1 f 
+\f0 +2 * c - j - d) % 7\
+l = math.floor((e + 11 * j
+\f1 \'a1\'cf
+\f0  22 * k)/ 451)\
+month = math. floor((j + k -7 * l + 114)/ 31)\
+day =1+ (j + k -7 * 1 + 114) % 31\
+print (\'91The date of Easter: \'91, day)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+I made almost no errors in the numerical values and computational logic of this assignment.\
+1. I omitted the required parentheses in the first line.\
+2. I should have used `import math` before using `math.floor()`. Instead, I ultimately opted for the most basic arithmetic logic (`//`).\
+\
+\
+Error # 2\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+print( 'The date of Easter: ', day month year)\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+If I want to write consecutive values separated by commas, I need to add commas between them.\
+\
+\
+Correct \
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 year = int(input('Enter the year: '))\
+\
+a = year // 100\
+b = year % 100\
+c = b // 4\
+d = b % 4\
+e = year % 19\
+f = a % 4\
+g = a // 4\
+h = (a + 8)// 25\
+i = (a - h +1)// 3\
+j = (19 * e + a - g - i + 15) % 30\
+k = (32 + 2 * f + 2 * c - j - d) % 7\
+l = (e + 11 * j + 22 * k) // 451\
+month = (j + k - 7 * l + 114)// 31\
+day = 1 + (j + k - 7 * l + 114) % 31\
+    \
+print('The date of Easter: ', day, month, year)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+}
