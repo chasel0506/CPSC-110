@@ -15,9 +15,9 @@ else:
 @dataclass
 class Player:
     """Describes the player."""
-    x: float
-    y: float
-    size: float
+    x:     float
+    y:     float
+    size:  float
     speed: float
     color: str
     food_count: int = 0
@@ -26,12 +26,11 @@ class Player:
     def move(self, deltaT: float, dirs: List[str]) -> Self:
         """
         Purpose: Moves a player by speed per change in time in given directions.
-        Examples:
-            player = Player(x=100, y=100, size=10, speed=10, color="red")
-            move(player, 10, ["UP"])    -> Player(100,   0, 10, 10, "red")
-            move(player, 10, ["DOWN"])  -> Player(100, 200, 10, 10, "red")
-            move(player, 10, ["RIGHT"]) -> Player(200, 100, 10, 10, "red")
-            move(player, 10, ["LEFT"])  -> Player(  0, 100, 10, 10, "red")
+        Example: player = Player(x=100, y=100, size=10, speed=10, color="red")
+                 move(player, 10, ["UP"])    -> Player(100,   0, 10, 10, "red")
+                 move(player, 10, ["DOWN"])  -> Player(100, 200, 10, 10, "red")
+                 move(player, 10, ["RIGHT"]) -> Player(200, 100, 10, 10, "red")
+                 move(player, 10, ["LEFT"])  -> Player(  0, 100, 10, 10, "red")
 
         """
         amount = self.speed * deltaT

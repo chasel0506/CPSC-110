@@ -8,8 +8,8 @@ import random
 @dataclass
 class Food:
     """Manages Food state."""
-    x: float
-    y: float
+    x:    float
+    y:    float
     size: float = 10
 
     def move(self):

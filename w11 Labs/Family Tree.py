@@ -18,8 +18,7 @@ class FamilyTree:
     def __init__(self, root_name):
         """
         Purpose: Initialize the FamilyTree with a root node.
-        Example:
-                 tree = FamilyTree("Root Person")
+        Example: tree = FamilyTree("Root Person")
                  tree.root.name -> "Root Person"
         """
         self.nodes = {}
@@ -28,8 +27,7 @@ class FamilyTree:
     def add_node(self, name):
         """
         Purpose: Add a new node to the family tree.
-        Example:
-                 tree = FamilyTree("Root Person")
+        Example: tree = FamilyTree("Root Person")
                  tree.add_node("Child 1")
                  "Child 1" in tree.nodes -> True
         """
@@ -40,8 +38,7 @@ class FamilyTree:
     def add_parent(self, child_name, parent_name):
         """
         Purpose: Add a parent to a child node.
-        Example:
-                 tree = FamilyTree("Root Person")
+        Example: tree = FamilyTree("Root Person")
                  tree.add_parent("Child 1", "Parent A")
                  "Parent A" in tree.nodes["Child 1"].parents -> True
         """
@@ -57,8 +54,7 @@ class FamilyTree:
     def add_child(self, parent_name, child_name):
         """
         Purpose: Add a child to a parent node.
-        Example:
-                 tree = FamilyTree("Root Person")
+        Example: tree = FamilyTree("Root Person")
                  tree.add_child("Root Person", "Child 1")
                  "Child 1" in tree.nodes["Root Person"].children -> True
         """
@@ -74,8 +70,7 @@ class FamilyTree:
     def add_partner(self, parent_name, partner_name):
         """
         Purpose: Add a partner to a parent node.
-        Example:
-                 tree = FamilyTree("Root Person")
+        Example: tree = FamilyTree("Root Person")
                  tree.add_partner("Root Person", "Spouse A")
                  "Spouse A" in tree.nodes["Root Person"].partners -> True
         """
@@ -88,8 +83,7 @@ class FamilyTree:
     def add_sibling(self, child_name, sibling_name):
         """
         Purpose: Add a sibling to a child node.
-        Example:
-                 tree = FamilyTree("Root Person")
+        Example: tree = FamilyTree("Root Person")
                  tree.add_sibling("Child 1", "Sibling 1")
                  "Sibling 1" in tree.nodes["Root Person"].children -> True
         """
@@ -107,13 +101,11 @@ class FamilyTree:
     def display_tree(self, node=None, level=0):
         """
         Purpose: Display the family tree starting from the given node.
-        Example:
-        tree = FamilyTree("Root Person")
-        tree.add_child("Root Person", "Child 1")
-        tree.display_tree()
-        Output:
-        Root Person
-          Child 1
+        Example: tree = FamilyTree("Root Person")
+                 tree.add_child("Root Person", "Child 1")
+                 tree.display_tree()
+            Output: Root Person
+                    Child 1
         """
         if node is None:
             node = self.root
