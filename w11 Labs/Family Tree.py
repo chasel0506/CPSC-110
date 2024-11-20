@@ -9,10 +9,10 @@ class FamilyNode:
                  node.children -> set()
                  node.parents  -> set()
         """
-        self.name = name
+        self.name     = name
         self.partners = set()
         self.children = set()
-        self.parents = set()
+        self.parents  = set()
 
 class FamilyTree:
     def __init__(self, root_name):
@@ -35,15 +35,15 @@ class FamilyTree:
             self.nodes[name] = FamilyNode(name)
         return self.nodes[name]
 
-    def add_parent(self, child_name, parent_name):
+    def addParent(self, child_name, parent_name):
         """
         Purpose: Add a parent to a child node.
         Example: tree = FamilyTree("Root Person")
-                 tree.add_parent("Child 1", "Parent A")
+                 tree.addParent("Child 1", "Parent A")
                  "Parent A" in tree.nodes["Child 1"].parents -> True
         """
-        child = self.add_node(child_name)
-        parent = self.add_node(parent_name)
+        child   = self.add_node(child_name)
+        parent  = self.add_node(parent_name)
 
         if len(child.parents) >= 2:
             raise ValueError("A child cannot have more than two parents.")
@@ -51,15 +51,15 @@ class FamilyTree:
         child.parents.add(parent)
         parent.children.add(child)
 
-    def add_child(self, parent_name, child_name):
+    def addChild(self, parent_name, child_name):
         """
         Purpose: Add a child to a parent node.
         Example: tree = FamilyTree("Root Person")
-                 tree.add_child("Root Person", "Child 1")
+                 tree.addChild("Root Person", "Child 1")
                  "Child 1" in tree.nodes["Root Person"].children -> True
         """
-        parent = self.add_node(parent_name)
-        child = self.add_node(child_name)
+        parent  = self.add_node(parent_name)
+        child   = self.add_node(child_name)
 
         if len(child.parents) >= 2:
             raise ValueError("A child cannot have more than two parents.")
@@ -67,27 +67,27 @@ class FamilyTree:
         child.parents.add(parent)
         parent.children.add(child)
 
-    def add_partner(self, parent_name, partner_name):
+    def addPartner(self, parent_name, partner_name):
         """
         Purpose: Add a partner to a parent node.
         Example: tree = FamilyTree("Root Person")
-                 tree.add_partner("Root Person", "Spouse A")
+                 tree.addPartner("Root Person", "Spouse A")
                  "Spouse A" in tree.nodes["Root Person"].partners -> True
         """
-        parent = self.add_node(parent_name)
+        parent  = self.add_node(parent_name)
         partner = self.add_node(partner_name)
 
         parent.partners.add(partner)
         partner.partners.add(parent)
 
-    def add_sibling(self, child_name, sibling_name):
+    def addSibling(self, child_name, sibling_name):
         """
         Purpose: Add a sibling to a child node.
         Example: tree = FamilyTree("Root Person")
-                 tree.add_sibling("Child 1", "Sibling 1")
+                 tree.addSibling("Child 1", "Sibling 1")
                  "Sibling 1" in tree.nodes["Root Person"].children -> True
         """
-        child = self.add_node(child_name)
+        child   = self.add_node(child_name)
         sibling = self.add_node(sibling_name)
 
         shared_parents = child.parents
@@ -98,87 +98,70 @@ class FamilyTree:
             parent.children.add(sibling)
             sibling.parents.add(parent)
 
-    def display_tree(self, node=None, level=0):
-        """
-        Purpose: Display the family tree starting from the given node.
-        Example: tree = FamilyTree("Root Person")
-                 tree.add_child("Root Person", "Child 1")
-                 tree.display_tree()
-            Output: Root Person
-                    Child 1
-        """
-        if node is None:
-            node = self.root
-
-        indent = "  " * level
-        print(f"{indent}{node.name}")
-
-        # Display partners
-        if node.partners:
-            print(f"{indent}  Partners:")
-            for partner in node.partners:
-                print(f"{indent}    - {partner.name}")
-
-        # Display children
-        if node.children:
-            print(f"{indent}  Children:")
-            for child in node.children:
-                self.display_tree(child, level + 1)
-
-        # Display parents (optional)
-        if level == 0 and node.parents:  # Only show parents for root for context
-            print(f"{indent}  Parents:")
-            for parent in node.parents:
-                print(f"{indent}    - {parent.name}")
+    def display_tree_graphviz(self):
+        lines = ["graph TD;"]
+        
+        added_edges = set()
+        
+        for node in self.nodes.values():
+            node_label = node.name.replace(" ", "")
+            lines.append(f"    {node_label}[{node.name}];")
             
-family_tree = FamilyTree("Great Grandparent 1")
+            for partner in node.partners:
+                partner_label = partner.name.replace(" ", "")
+                edge = tuple(sorted([node_label, partner_label]))
+                if edge not in added_edges:
+                    lines.append(f"    {node_label} === {partner_label};")
+                    added_edges.add(edge)
+                
+            for child in node.children:
+                child_label = child.name.replace(" ", "")
+                lines.append(f"    {node_label} --> {child_label};")
+        
+        return "\n".join(lines)
+
+# Build the family tree as before
+family_tree = FamilyTree("Great-Grandpa John")
 
 # Generation 1 (Depth 1)
-family_tree.add_partner("Great Grandparent 1", "Great Grandparent 2")
+family_tree.addPartner("Great-Grandpa John", "Great-Grandma Mary")
 
 # Generation 2 (Depth 2)
-family_tree.add_child("Great Grandparent 1", "Grandparent 1")
-family_tree.add_child("Great Grandparent 2", "Grandparent 1")
-family_tree.add_child("Great Grandparent 1", "Grandparent 2")
-family_tree.add_child("Great Grandparent 2", "Grandparent 2")
+family_tree.addChild("Great-Grandpa John", "Grandpa Mike")
+family_tree.addChild("Great-Grandma Mary", "Grandpa Mike")
+family_tree.addChild("Great-Grandpa John", "Grandma Emma")
+family_tree.addChild("Great-Grandma Mary", "Grandma Emma")
 
 # Generation 3 (Depth 3)
-family_tree.add_partner("Grandparent 1", "Grandparent 1 Partner")
-family_tree.add_partner("Grandparent 2", "Grandparent 2 Partner")
+family_tree.addPartner("Grandpa Mike", "Grandma Lucy")
+family_tree.addPartner("Grandma Emma", "Grandpa Alex")
 
-family_tree.add_child("Grandparent 1", "Parent 1")
-family_tree.add_child("Grandparent 1 Partner", "Parent 1")
-family_tree.add_child("Grandparent 2", "Parent 2")
-family_tree.add_child("Grandparent 2 Partner", "Parent 2")
+family_tree.addChild("Grandpa Mike", "Mother Kate")
+family_tree.addChild("Grandma Lucy", "Mother Kate")
+family_tree.addChild("Grandma Emma", "Father Leo")
+family_tree.addChild("Grandpa Alex", "Father Leo")
 
-family_tree.add_child("Grandparent 1", "Parent 3")
-family_tree.add_child("Grandparent 1 Partner", "Parent 3")
+family_tree.addChild("Grandpa Mike", "Mother Zoe")
+family_tree.addChild("Grandma Lucy", "Mother Zoe")
 
 # Generation 4 (Depth 4)
-family_tree.add_partner("Parent 1", "Parent 1 Partner")
-family_tree.add_partner("Parent 2", "Parent 2 Partner")
+family_tree.addPartner("Mother Kate", "Father Tom")
+family_tree.addPartner("Father Leo", "Mother Lily")
 
-family_tree.add_child("Parent 1", "Child 1")
-family_tree.add_child("Parent 1 Partner", "Child 1")
-family_tree.add_child("Parent 1", "Child 2")
-family_tree.add_child("Parent 1 Partner", "Child 2")
-family_tree.add_child("Parent 2", "Child 3")
-family_tree.add_child("Parent 2 Partner", "Child 3")
+family_tree.addChild("Mother Kate", "Child 1")
+family_tree.addChild("Father Tom", "Child 1")
+family_tree.addChild("Mother Kate", "Child 2")
+family_tree.addChild("Father Tom", "Child 2")
+family_tree.addChild("Father Leo", "Child 3")
+family_tree.addChild("Mother Lily", "Child 3")
 
-family_tree.add_child("Parent 3", "Child 4")
-family_tree.add_child("Parent 3", "Child 5")
+family_tree.addChild("Mother Zoe", "Child 4")
+family_tree.addChild("Mother Zoe", "Child 5")
 
 # Adding siblings, partners, and expanding width
-family_tree.add_sibling("Child 1", "Child 6")
-family_tree.add_partner("Child 2", "Child 2 Partner")
-family_tree.add_child("Child 2", "Grandchild 1")
-family_tree.add_child("Child 2 Partner", "Grandchild 1")
+family_tree.addSibling("Child 1", "Child 6")
+family_tree.addPartner("Child 2", "Child 2 Partner")
+family_tree.addPartner("Child 3", "Child 3 Partner")
 
-family_tree.add_partner("Child 3", "Child 3 Partner")
-family_tree.add_child("Child 3", "Grandchild 2")
-family_tree.add_child("Child 3 Partner", "Grandchild 2")
-
-family_tree.add_child("Child 6", "Grandchild 3")
-
-# Display the entire family tree
-family_tree.display_tree()
+# Display the family tree in Graphviz format
+print(family_tree.display_tree_graphviz())
